@@ -1,3 +1,5 @@
+package com.lynx.lynxandroidproject
+
 import android.app.Application
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.imagepipeline.core.ImagePipelineConfig
@@ -7,12 +9,13 @@ import com.lynx.service.http.LynxHttpService
 import com.lynx.service.image.LynxImageService
 import com.lynx.service.log.LynxLogService
 import com.lynx.tasm.service.LynxServiceCenter
+import com.lynx.tasm.LynxEnv
 
 class MainApplication : Application() {
-
     override fun onCreate() {
         super.onCreate()
         initLynxService()
+        initLynxEnv()
     }
 
     private fun initLynxService() {
@@ -24,5 +27,14 @@ class MainApplication : Application() {
         LynxServiceCenter.inst().registerService(LynxImageService.getInstance())
         LynxServiceCenter.inst().registerService(LynxLogService)
         LynxServiceCenter.inst().registerService(LynxHttpService)
+    }
+
+    private fun initLynxEnv() {
+        LynxEnv.inst().init(
+            this,
+            null,
+            null,
+            null
+        )
     }
 }

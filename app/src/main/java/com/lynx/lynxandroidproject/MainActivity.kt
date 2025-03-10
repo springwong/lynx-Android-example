@@ -12,21 +12,35 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.lynx.lynxandroidproject.ui.theme.LynxAndroidProjectTheme
+import com.lynx.tasm.LynxView
+import com.lynx.tasm.LynxViewBuilder
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            LynxAndroidProjectTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
-            }
-        }
+        // load lynx view
+        val lynxView = buildLynxView()
+        setContentView(lynxView)
+
+        val uri = "main.lynx.bundle";
+        lynxView.renderTemplateUrl(uri, "")
+//        enableEdgeToEdge()
+//        setContent {
+//            LynxAndroidProjectTheme {
+//                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+//                    Greeting(
+//                        name = "Android",
+//                        modifier = Modifier.padding(innerPadding)
+//                    )
+//                }
+//            }
+//        }
+    }
+
+    private fun buildLynxView(): LynxView {
+        val viewBuilder = LynxViewBuilder()
+        viewBuilder.setTemplateProvider(LynxProvider(this))
+        return viewBuilder.build(this)
     }
 }
 
