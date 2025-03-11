@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
@@ -54,11 +55,11 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 @Composable
 fun TestButton(
     text: String = "Click Me",
-    onClick: () -> Unit
+    onClick: () -> Unit,
 ) {
     Button(
         onClick = onClick,
-        modifier = Modifier.padding(16.dp)
+        modifier = Modifier.padding(48.dp),
     ) {
         Text(text = text)
     }
